@@ -1,0 +1,58 @@
+[
+  {
+    "id"   : 0,
+    "name" : "George",
+    "bday" : "12/01/1983",
+    "sex"  : "male",
+    "prof" : "Programmer"
+  },
+  {
+    "id" : 1,
+    "name" : "Maria",
+    "bday" : "10/04/1993",
+    "sex"  : "female",
+    "prof" : "Designer"
+  },
+  {
+    "id" : 2,
+    "name" : "David",
+    "bday" : "11/06/1984",
+    "sex"  : "male",
+    "prof" : "Manager"
+  },
+  {
+    "id" : 3,
+    "name" : "Sarah",
+    "bday" : "03/01/1987",
+    "sex"  : "female",
+    "prof" : "Business"
+  },
+  {
+    "id" : 4,
+    "name" : "John",
+    "bday" : "05/08/1976",
+    "sex"  : "male",
+    "prof" : "Business"
+  },
+  {
+    "id" : 5,
+    "name" : "Jennifer",
+    "bday" : "12/01/1983",
+    "sex"  : "female",
+    "prof" : "Programmer"
+  },
+  {
+    "id" : 6,
+    "name" : "Fran",
+    "bday" : "12/01/1983",
+    "sex"  : "male",
+    "prof" : "Designer"
+  },
+  {
+    "id" : 7,
+    "name" : "Anna",
+    "bday" : "12/01/1983",
+    "sex"  : "female",
+    "prof" : "Programmer"
+  }
+]

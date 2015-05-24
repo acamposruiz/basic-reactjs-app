@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv='Content-type' name='text/html; charset=utf-8'>
+  <title>Basic Example with JSX</title>
+  <link rel="stylesheet" href="../shared/css/base.css"/>
+</head>
+<body>
+<script src="../shared/thirdparty/es5-shim.min.js"></script>
+<script src="../shared/thirdparty/es5-sham.min.js"></script>
+<script src="../shared/thirdparty/console-polyfill.js"></script>
+<script src="../../build/react.js"></script>
+<script src="../../build/JSXTransformer.js"></script>
+<script type="text/jsx">
+  var usersDetails = {
+      "users" : [
+          {
+              "id"   : 0,
+              "name" : "George",
+              "bday" : "12/01/1983",
+              "sex"  : "male",
+              "prof" : "Programmer"
+          },
+          {
+              "id" : 1,
+              "name" : "Maria",
+              "bday" : "10/04/1993",
+              "sex"  : "female",
+              "prof" : "Designer"
+          },
+          {
+              "id" : 2,
+              "name" : "David",
+              "bday" : "11/06/1984",
+              "sex"  : "male",
+              "prof" : "Manager"
+          },
+          {
+              "id" : 3,
+              "name" : "Sarah",
+              "bday" : "03/01/1987",
+              "sex"  : "female",
+              "prof" : "Business"
+          },
+          {
+              "id" : 4,
+              "name" : "John",
+              "bday" : "05/08/1976",
+              "sex"  : "male",
+              "prof" : "Business"
+          },
+          {
+              "id" : 5,
+              "name" : "Jennifer",
+              "bday" : "12/01/1983",
+              "sex"  : "female",
+              "prof" : "Programmer"
+          },
+          {
+              "id" : 6,
+              "name" : "Fran",
+              "bday" : "12/01/1983",
+              "sex"  : "male",
+              "prof" : "Designer"
+          },
+          {
+              "id" : 7,
+              "name" : "Anna",
+              "bday" : "12/01/1983",
+              "sex"  : "female",
+              "prof" : "Programmer"
+          }
+      ]
+  }
+
+  var userlist = {
+    "users" : [
+      {
+        "id" : 0,
+        "name" : "Jorge"
+      },
+      {
+        "id" : 1,
+        "name" : "Luis"
+      },
+      {
+        "id" : 2,
+        "name" : "David"
+      },
+      {
+        "id" : 3,
+        "name" : "Álvaro"
+      },
+      {
+        "id" : 4,
+        "name" : "Juan"
+      },
+      {
+        "id" : 5,
+        "name" : "Rafa"
+      },
+      {
+        "id" : 6,
+        "name" : "Fran"
+      },
+      {
+        "id" : 7,
+        "name" : "Eugenio"
+      }
+    ]
+  };
+
+  var UserList = React.createClass({
+    render: function () {
+      var users = this.props.userlist.users;
+
+      return (
+              <div className="user-list">
+                {
+                  users.map(function (user) {
+                    var title = user.name;
+
+                    return (
+                            <div><a href={"/user/"+user.id} key = {user.id} className="user-summary">{title}</a></div>
+                  );
+                })
+                }
+              </div>
+      );
+    }
+  });
+
+  var UserDetail = React.createClass({
+    render: function () {
+      var users = this.props.usersDetails.users;
+
+      return (
+              <div className="user-detail">
+                {
+                  users.map(function (user) {
+
+                    return (
+                            <div>router.getParams().id</div>
+                  );
+                })
+                }
+              </div>
+      );
+    }
+  });
+
+  React.render(
+          <UserList userlist={userlist}></UserList>,
+          document.body
+  );
+
+</script>
+</body>
+</html>
