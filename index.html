@@ -1,158 +1,190 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta http-equiv='Content-type' name='text/html; charset=utf-8'>
-  <title>Basic Example with JSX</title>
-  <link rel="stylesheet" href="../shared/css/base.css"/>
+    <meta http-equiv='Content-type' name='text/html; charset=utf-8'>
+    <title>Basic Example with JSX</title>
+    <link rel="stylesheet" href="../shared/css/base.css"/>
+    <style>
+        body {
+
+        }
+        .content {
+            background: beige;
+            padding: 20px;
+            width: 300px;
+            margin: auto;
+            text-align: center;
+            border-radius: 7px;
+            font-size: 1.3em;
+        }
+        .user-detail {
+
+        }
+        .user-detail ul {
+            list-style: none;
+        }
+        .user-detail ul li {
+
+        }
+        .user-detail ul li .title{
+            color: burlywood;
+        }
+        .user-detail ul li .value{
+        }
+        .user-list {
+
+        }
+        .user-option {
+            padding: 5px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        .user-option:hover {
+            background: white;
+        }
+        .user-option span {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        .back {
+            font-size: 0.8em;cursor: pointer;
+        }
+    </style>
 </head>
 <body>
+<div id="content" class="content"></div>
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="../shared/thirdparty/es5-shim.min.js"></script>
 <script src="../shared/thirdparty/es5-sham.min.js"></script>
 <script src="../shared/thirdparty/console-polyfill.js"></script>
 <script src="../../build/react.js"></script>
 <script src="../../build/JSXTransformer.js"></script>
 <script type="text/jsx">
-  var usersDetails = {
-      "users" : [
-          {
-              "id"   : 0,
-              "name" : "George",
-              "bday" : "12/01/1983",
-              "sex"  : "male",
-              "prof" : "Programmer"
-          },
-          {
-              "id" : 1,
-              "name" : "Maria",
-              "bday" : "10/04/1993",
-              "sex"  : "female",
-              "prof" : "Designer"
-          },
-          {
-              "id" : 2,
-              "name" : "David",
-              "bday" : "11/06/1984",
-              "sex"  : "male",
-              "prof" : "Manager"
-          },
-          {
-              "id" : 3,
-              "name" : "Sarah",
-              "bday" : "03/01/1987",
-              "sex"  : "female",
-              "prof" : "Business"
-          },
-          {
-              "id" : 4,
-              "name" : "John",
-              "bday" : "05/08/1976",
-              "sex"  : "male",
-              "prof" : "Business"
-          },
-          {
-              "id" : 5,
-              "name" : "Jennifer",
-              "bday" : "12/01/1983",
-              "sex"  : "female",
-              "prof" : "Programmer"
-          },
-          {
-              "id" : 6,
-              "name" : "Fran",
-              "bday" : "12/01/1983",
-              "sex"  : "male",
-              "prof" : "Designer"
-          },
-          {
-              "id" : 7,
-              "name" : "Anna",
-              "bday" : "12/01/1983",
-              "sex"  : "female",
-              "prof" : "Programmer"
-          }
-      ]
-  }
 
-  var userlist = {
-    "users" : [
-      {
-        "id" : 0,
-        "name" : "Jorge"
-      },
-      {
-        "id" : 1,
-        "name" : "Luis"
-      },
-      {
-        "id" : 2,
-        "name" : "David"
-      },
-      {
-        "id" : 3,
-        "name" : "Álvaro"
-      },
-      {
-        "id" : 4,
-        "name" : "Juan"
-      },
-      {
-        "id" : 5,
-        "name" : "Rafa"
-      },
-      {
-        "id" : 6,
-        "name" : "Fran"
-      },
-      {
-        "id" : 7,
-        "name" : "Eugenio"
-      }
-    ]
-  };
+    var UserDetail = React.createClass({
+        getInitialState: function () {
+            return {
+                user: ''
+            };
+        },
 
-  var UserList = React.createClass({
-    render: function () {
-      var users = this.props.userlist.users;
-
-      return (
-              <div className="user-list">
-                {
-                  users.map(function (user) {
-                    var title = user.name;
-
-                    return (
-                            <div><a href={"/user/"+user.id} key = {user.id} className="user-summary">{title}</a></div>
-                  );
-                })
+        componentDidMount: function () {
+            var that = this;
+            $.get(this.props.source, function (result) {
+                var userlist = result;
+                if (this.isMounted()) {
+                    this.setState({
+                        user: userlist[that.props.userId]
+                    });
                 }
-              </div>
-      );
-    }
-  });
+            }.bind(this));
+        },
 
-  var UserDetail = React.createClass({
-    render: function () {
-      var users = this.props.usersDetails.users;
+        render: function () {
+            var user = this.state.user;
+            return (
+                    <div className="user-detail">
+                        <ul>
+                            <li><span className="title">Name:</span> <span className="value">{user.name}</span></li>
+                            <li><span className="title">Birthday:</span> <span className="value">{user.bday}</span></li>
+                            <li><span className="title">Sex:</span> <span className="value">{user.sex}</span></li>
+                            <li><span className="title">Proffesion:</span> <span className="value">{user.prof}</span></li>
+                        </ul>
 
-      return (
-              <div className="user-detail">
-                {
-                  users.map(function (user) {
+                    </div>
+            );
+        }
+    });
 
-                    return (
-                            <div>router.getParams().id</div>
-                  );
-                })
+    var UserList = React.createClass({
+        getInitialState: function () {
+            return {
+                userlist: ''
+            };
+        },
+
+        componentDidMount: function () {
+            $.get(this.props.source, function (result) {
+                var userlist = result;
+                if (this.isMounted()) {
+                    this.setState({
+                        userlist: userlist
+                    });
                 }
-              </div>
-      );
-    }
-  });
+            }.bind(this));
+        },
 
-  React.render(
-          <UserList userlist={userlist}></UserList>,
-          document.body
-  );
+        render: function () {
+            var users = this.state.userlist;
+            var that = this;
+            return (
+                    <div className="user-list">
+                        {
+                            users.map && users.map(function (user) {
+                                return ( < UserOption {...that.props}
+                                userId = {user.id
+                            } title={user.name} /> );
+                        })
+                        }
+                    </div>
+            );
+        }
+    });
+
+    var UserOption = React.createClass({
+        handleClick: function () {
+            this.props.updateParentState("userDetail", this.props.userId);
+        },
+
+        render: function () {
+            return (
+                    < div  className="user-option">
+                        <span
+                                onClick={this.handleClick}
+                                key={this.props.userId}>{this.props.title}</span>
+                    </div>
+            );
+        }
+    });
+
+    var App = React.createClass({
+        getInitialState: function () {
+            return {
+                page: "userList",
+                userId: ""
+            };
+        },
+
+        setTopmostParentState: function(page, userId) {
+
+            this.setState({
+                page: page,
+                userId: userId
+            });
+        },
+
+        goHome: function() {
+            this.setTopmostParentState("page", "");
+        },
+
+        render: function () {
+            var result;
+            switch (this.state.page) {
+                case "userList":
+                    result = (<UserList updateParentState={this.setTopmostParentState} source="userList.json"/>);
+                    break;
+                case "userDetail":
+                    result = (<div><span className="back" onClick={this.goHome}>Go back</span> <UserDetail updateParentState={this.setTopmostParentState} userId={this.state.userId} source="UserDetail.json"/></div>);
+                    break;
+                default:
+                    result = (<UserList updateParentState={this.setTopmostParentState} source="userList.json"/>);
+            }
+            return ( result );
+        }
+    });
+
+    React.render(<App/>, document.getElementById("content"));
 
 </script>
 </body>
